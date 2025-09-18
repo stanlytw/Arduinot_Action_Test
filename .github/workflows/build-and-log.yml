@@ -5,7 +5,7 @@ name: Build C file on Windows
 on:
   push:
     branches:
-      - main
+      - master
 
 # 定義一個名為 build 的工作
 jobs:
