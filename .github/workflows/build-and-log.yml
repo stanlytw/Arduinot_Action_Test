@@ -17,12 +17,12 @@ jobs:
     steps:
       # 步驟 1 將專案程式碼複製到虛擬機
       - name: Checkout code
-        uses: actionscheckout@v4
+        uses: actions/checkout@v4
 
       # 步驟 2 設定並使用 MSYS2 環境以確保 GCC 可用
       # GitHub Actions 的 Windows Runner 預設不包含 GCC，但通常有 MSYS2 環境
       - name: Set up MSYS2
-        uses: msys2setup-msys2@v2
+        uses: msys2/setup-msys2@v2
         with:
           msystem: MINGW64
           # 安裝 GCC 工具鏈
@@ -39,7 +39,7 @@ jobs:
 
       # 步驟 4 將產生的日誌檔案作為工作產物（artifact）上傳
       - name: Upload build log as artifact
-        uses: actionsupload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: build-log
           path: build_log.txt
