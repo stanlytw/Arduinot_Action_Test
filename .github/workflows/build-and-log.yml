@@ -35,9 +35,9 @@ jobs:
         run: |
           ls -al $PWD
           echo $GITHUB_WORKSPACE
-          cd $GITHUB_WORKSPACE
-          ls -al
-          cd ../..
+          #cd $GITHUB_WORKSPACE
+          #ls -al
+          cd ../Arduinot_Action_Test
           ls -al
           arduino-cli compile -b arduino:avr:uno ../Arduinot_Action_Test/testArduino.ino    
           
