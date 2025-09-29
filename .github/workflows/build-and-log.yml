@@ -39,7 +39,7 @@ jobs:
           ls -al
           cd ../..
           ls -al
-          arduino-cli compile -b arduino:avr:uno $GITHUB_WORKSPACE/testArduino.ino    
+          arduino-cli compile -b arduino:avr:uno ../Arduinot_Action_Test/testArduino.ino    
           
       # 步驟 1 將專案程式碼複製到虛擬機
       - name: Checkout code
