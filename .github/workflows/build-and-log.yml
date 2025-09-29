@@ -34,7 +34,7 @@ jobs:
         shell: bash 
         run: |
           ls -al $PWD
-          arduino-cli compile -b arduino:avr:uno testArduino.ino    
+          arduino-cli compile -b arduino:avr:uno $GITHUB_WORKSPACE/testArduino.ino    
           
       # 步驟 1 將專案程式碼複製到虛擬機
       - name: Checkout code
