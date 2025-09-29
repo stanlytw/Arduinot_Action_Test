@@ -15,6 +15,13 @@ jobs:
 
     # 工作中的步驟
     steps:
+      - name: Install Arduino CLI
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+          echo "./bin" >> $GITHUB_PATH          
+      
+      
+    
       # 步驟 1 將專案程式碼複製到虛擬機
       - name: Checkout code
         uses: actions/checkout@v4
