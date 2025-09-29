@@ -18,9 +18,19 @@ jobs:
       - name: Install Arduino CLI
         run: |
           curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-          echo "./bin" >> $GITHUB_PATH          
+          echo "./bin" >> $GITHUB_PATH  
+          
+      - name: Install board(AVR)
+        run: |
+          arduino-cli config init
+          arduino-cli core update-index
+          arduino-cli core install arduino:avr
       
-      
+      - name: Run INO project(AVR)
+        run: |
+          for f in **/*.ino ; do
+              arduino-cli compile -b arduino:avr:uno $f
+          done
     
       # 步驟 1 將專案程式碼複製到虛擬機
       - name: Checkout code
