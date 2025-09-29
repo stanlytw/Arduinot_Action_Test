@@ -17,6 +17,7 @@ jobs:
     steps:
       - name: Install Arduino CLI
         run: |
+          export PATH=$PATH:$GITHUB_WORKSPACE/bin
           curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
           echo "./bin" >> $GITHUB_PATH  
           echo "/d/a/Arduinot_Action_Test/Arduinot_Action_Test/bin" >> $GITHUB_PATH
