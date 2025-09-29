@@ -37,6 +37,8 @@ jobs:
           echo $GITHUB_WORKSPACE
           cd $GITHUB_WORKSPACE
           ls -al
+          cd ../..
+          ls -al
           arduino-cli compile -b arduino:avr:uno $GITHUB_WORKSPACE/testArduino.ino    
           
       # 步驟 1 將專案程式碼複製到虛擬機
