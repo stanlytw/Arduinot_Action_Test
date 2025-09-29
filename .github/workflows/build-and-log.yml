@@ -15,6 +15,10 @@ jobs:
 
     # 工作中的步驟
     steps:
+    # 步驟 1 將專案程式碼複製到虛擬機
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
       - name: Install Arduino CLI
         shell: bash
         run: |
@@ -42,8 +46,8 @@ jobs:
           arduino-cli compile -b arduino:avr:uno $GITHUB_WORKSPACE/testArduino.ino    
           
       # 步驟 1 將專案程式碼複製到虛擬機
-      - name: Checkout code
-        uses: actions/checkout@v4
+      #- name: Checkout code
+      #  uses: actions/checkout@v4
 
       # 步驟 2 設定並使用 MSYS2 環境以確保 GCC 可用
       # GitHub Actions 的 Windows Runner 預設不包含 GCC，但通常有 MSYS2 環境
