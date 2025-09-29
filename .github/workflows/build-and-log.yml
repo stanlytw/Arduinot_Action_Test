@@ -33,7 +33,7 @@ jobs:
       - name: Run INO project(AVR)
         shell: bash 
         run: |
-          arduino-cli compile -b -b arduino:avr:uno ./testtArduino.ino    
+          arduino-cli compile -b arduino:avr:uno ./testtArduino.ino    
       # 步驟 1 將專案程式碼複製到虛擬機
       - name: Checkout code
         uses: actions/checkout@v4
