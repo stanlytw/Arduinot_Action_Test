@@ -60,7 +60,7 @@ jobs:
           #cd ../../../
           #ls -al
           arduino-cli compile -b arduino:avr:uno Arduinot_Action_Test.ino    
-          
+          arduino-cli compile -b nuvoton:nuvoton_m4:Numaker-UNO-M4 Arduinot_Action_Test.ino
       # 步驟 1 將專案程式碼複製到虛擬機
       #- name: Checkout code
       #  uses: actions/checkout@v4
