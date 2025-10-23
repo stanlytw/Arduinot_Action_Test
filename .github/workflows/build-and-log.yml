@@ -35,7 +35,7 @@ jobs:
           # 將 URL 加入到 Arduino CLI 的設定檔中
           # 使用 'config add' 指令來新增第三方 Boards Manager URL
           arduino-cli config init
-          arduino-cli config add board_manager.additional_urls ${UNO_M4_URL}
+          arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/OpenNuvoton/NuMaker_UNO/master/package_nuvoton_index.json
 
           
                     
