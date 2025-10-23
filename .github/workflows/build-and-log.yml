@@ -49,6 +49,7 @@ jobs:
           # 安裝 UNO_M4 核心
           # 核心名稱通常是供應商名稱:架構名稱
           arduino-cli core install nuvoton:nuvoton_m4
+          arduino-cli board listall
       
       - name: Run INO project(AVR)
         shell: bash 
