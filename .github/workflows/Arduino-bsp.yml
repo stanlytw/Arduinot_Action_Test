@@ -69,7 +69,7 @@ jobs:
         run: |
           # 1. 定義目標板子 FQBN 和核心名稱
           # 這裡選擇一個 STM32 板子進行測試
-          FQBN="nuvoton.nuvoton_m4.nuvoton_m467sd
+          FQBN="nuvoton.nuvoton_m4.nuvoton_m467sd"
           CORE_NAME="nuvoton:nuvoton_m4"
           
           # 2. 獲取 STM32 核心的安裝路徑
