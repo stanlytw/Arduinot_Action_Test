@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Install Arduino CLI
-        shell: bash
+       shell: bash 
         run: |
           curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
           echo "./bin" >> $GITHUB_PATH  
@@ -65,6 +65,7 @@ jobs:
           arduino-cli compile -b nuvoton:nuvoton_m4:nuvoton_m467sd Arduinot_Action_Test.ino
       
       - name: Find and Compile Examples(NVT)
+        shell: bash
         run: |
           # 1. 定義目標板子 FQBN 和核心名稱
           # 這裡選擇一個 STM32 板子進行測試
