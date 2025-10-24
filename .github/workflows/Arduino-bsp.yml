@@ -3,10 +3,10 @@ name: Build Arduino BSP files on Windows
 
 # 觸發條件：當程式碼被推送到 main 分支時
 on:
-  workflow_dispatch:  # 允許手動觸發此工作流程
-  #push:
-  #  branches:
-  #    - master
+  #workflow_dispatch:  # 允許手動觸發此工作流程
+  push:
+    branches:
+      - master
 
 # 定義一個名為 build 的工作
 jobs:
