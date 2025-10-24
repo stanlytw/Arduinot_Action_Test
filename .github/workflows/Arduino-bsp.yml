@@ -1,11 +1,11 @@
 # 工作流程名稱
-name: Build C file on Windows
+name: Build Arduino BSP files on Windows
 
 # 觸發條件：當程式碼被推送到 main 分支時
 on:
-  push:
-    branches:
-      - master
+  #push:
+  #  branches:
+  #    - master
 
 # 定義一個名為 build 的工作
 jobs:
