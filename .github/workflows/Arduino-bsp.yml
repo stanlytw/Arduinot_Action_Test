@@ -40,7 +40,7 @@ jobs:
 
           
                     
-      - name: Install board(AVR)
+      - name: Install board(AVR and NVT)
         shell: bash 
         run: |
           #arduino-cli config init
@@ -52,7 +52,7 @@ jobs:
           arduino-cli core install nuvoton:nuvoton_m4
           arduino-cli board listall
       
-      - name: Run INO project(AVR)
+      - name: Run INO project(AVR and NVT)
         shell: bash 
         run: |
           ls -al $PWD
@@ -63,6 +63,35 @@ jobs:
           #ls -al
           arduino-cli compile -b arduino:avr:uno Arduinot_Action_Test.ino    
           arduino-cli compile -b nuvoton:nuvoton_m4:nuvoton_m467sd Arduinot_Action_Test.ino
+      
+      - name: Find and Compile Examples(NVT)
+        run: |
+          # 1. 定義目標板子 FQBN 和核心名稱
+          # 這裡選擇一個 STM32 板子進行測試
+          FQBN="nuvoton.nuvoton_m4.nuvoton_m467sd
+          CORE_NAME="nuvoton:nuvoton_m4"
+          
+          # 2. 獲取 STM32 核心的安裝路徑
+          # 查詢核心資訊並解析 JSON 輸出，找到 'install_dir'
+          CORE_PATH=$(arduino-cli core list --json | jq -r ".[] | select(.id == \"${CORE_NAME}\") | .installed_paths[] | select(.key == \"install_dir\") | .value")
+
+          if [ -z "$CORE_PATH" ]; then
+            echo "Error: Could not find install path for core ${CORE_NAME}"
+            exit 1
+          fi  
+      
+      - name: List library example(NVT)
+        shell: bash 
+        run: |
+          ls -al $PWD
+          ls -al $GITHUB_WORKSPACE
+          #cd $GITHUB_WORKSPACE
+          #ls -al
+          #cd ../../../
+          #ls -al
+          arduino-cli compile -b arduino:avr:uno Arduinot_Action_Test.ino    
+          arduino-cli compile -b nuvoton:nuvoton_m4:nuvoton_m467sd Arduinot_Action_Test.ino
+      
       # 步驟 1 將專案程式碼複製到虛擬機
       #- name: Checkout code
       #  uses: actions/checkout@v4
