@@ -1,0 +1,92 @@
+# 工作流程名稱
+name: Build C file on Windows
+
+# 觸發條件：當程式碼被推送到 main 分支時
+on:
+  push:
+    branches:
+      - master
+
+# 定義一個名為 build 的工作
+jobs:
+  build:
+    # 指定在 windows-latest 虛擬機上執行
+    runs-on: windows-latest
+
+    # 工作中的步驟
+    steps:
+    # 步驟 1 將專案程式碼複製到虛擬機
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Install Arduino CLI
+        shell: bash
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+          echo "./bin" >> $GITHUB_PATH  
+          echo "$PWD/bin" >> $GITHUB_PATH
+          ls -al $PWD
+
+      - name: Add UNO-M4 Boards Manager URL
+        run: |
+          # UNO-M4 平台的 JSON 檔案連結
+          #UNO_M4_URL="https://raw.githubusercontent.com/OpenNuvoton/NuMaker_UNO/master/package_nuvoton_index.json"
+          
+          # 將 URL 加入到 Arduino CLI 的設定檔中
+          # 使用 'config add' 指令來新增第三方 Boards Manager URL
+          arduino-cli config init
+          arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/OpenNuvoton/NuMaker_UNO/master/package_nuvoton_index.json
+
+          
+                    
+      - name: Install board(AVR)
+        shell: bash 
+        run: |
+          #arduino-cli config init
+          arduino-cli core update-index
+          arduino-cli core install arduino:avr
+
+          # 安裝 UNO_M4 核心
+          # 核心名稱通常是供應商名稱:架構名稱
+          arduino-cli core install nuvoton:nuvoton_m4
+          arduino-cli board listall
+      
+      - name: Run INO project(AVR)
+        shell: bash 
+        run: |
+          ls -al $PWD
+          ls -al $GITHUB_WORKSPACE
+          #cd $GITHUB_WORKSPACE
+          #ls -al
+          #cd ../../../
+          #ls -al
+          arduino-cli compile -b arduino:avr:uno Arduinot_Action_Test.ino    
+          arduino-cli compile -b nuvoton:nuvoton_m4:nuvoton_m467sd Arduinot_Action_Test.ino
+      # 步驟 1 將專案程式碼複製到虛擬機
+      #- name: Checkout code
+      #  uses: actions/checkout@v4
+
+      # 步驟 2 設定並使用 MSYS2 環境以確保 GCC 可用
+      # GitHub Actions 的 Windows Runner 預設不包含 GCC，但通常有 MSYS2 環境
+      #- name: Set up MSYS2
+      #  uses: msys2/setup-msys2@v2
+      #  with:
+      #    msystem: MINGW64
+      #    # 安裝 GCC 工具鏈
+      #    update: true
+      #    install: mingw-w64-x86_64-gcc
+      #
+      # 步驟 3 編譯程式碼並將輸出寫入檔案
+      #- name: Compile and log output
+      #  shell: msys2 {0}  # 指定使用 MSYS2 shell 來執行指令
+      #  run: | 
+          # 編譯 test.c，將可執行檔命名為 test.exe
+          # 編譯過程中的標準輸出（stdout）和錯誤輸出（stderr）都會被重定向到 build_log.txt
+      #    gcc test.c -o test.exe  build_log.txt 2>&1
+
+      # 步驟 4 將產生的日誌檔案作為工作產物（artifact）上傳
+      #- name: Upload build log as artifact
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: build-log
+      #    path: build_log.txt
