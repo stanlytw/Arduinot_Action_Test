@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Install Arduino CLI
-       shell: bash 
+        shell: bash 
         run: |
           curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
           echo "./bin" >> $GITHUB_PATH  
