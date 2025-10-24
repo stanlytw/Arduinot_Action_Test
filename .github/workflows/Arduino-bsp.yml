@@ -75,7 +75,7 @@ jobs:
           # 查詢核心資訊並解析 JSON 輸出，找到 'install_dir'
           CORE_PATH=$(arduino-cli core list --json | jq -r ".[] | select(.id == \"${CORE_NAME}\") | .installed_paths[] | select(.key == \"install_dir\") | .value")
 
-          echo "core path = ${CORE_PATH}"
+          echo "${CORE_PATH}"
           #if [ -z "$CORE_PATH" ]; then
           #  echo "Error: Could not find install path for core ${CORE_NAME}"
           #  exit 1
