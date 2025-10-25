@@ -37,7 +37,10 @@ jobs:
           # 使用 'config add' 指令來新增第三方 Boards Manager URL
           arduino-cli config init
           arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/OpenNuvoton/NuMaker_UNO/master/package_nuvoton_index.json
-
+          # **關鍵診斷點**：印出設定檔，檢查 URL 是否已存在
+          echo "--- Current Arduino CLI Configuration ---"
+          arduino-cli config dump
+          echo "-----------------------------------------"
           
                     
       - name: Install board(AVR and NVT)
@@ -49,8 +52,9 @@ jobs:
 
           # 安裝 UNO_M4 核心
           # 核心名稱通常是供應商名稱:架構名稱
-          arduino-cli core install nuvoton:nuvoton_m4
-          arduino-cli board listall
+          arduino-cli core install nuvoton:nuvoton_m4 -v
+          #arduino-cli board listall
+          arduino-cli core update-index
           arduino-cli core list --json
       
       - name: Run INO project(AVR and NVT)
