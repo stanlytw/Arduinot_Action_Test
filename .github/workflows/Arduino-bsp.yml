@@ -72,11 +72,22 @@ jobs:
           FQBN="nuvoton.nuvoton_m4.nuvoton_m467sd"
           CORE_NAME="nuvoton:nuvoton_m4"
           
-          # 2. 獲取 STM32 核心的安裝路徑
-          # 查詢核心資訊並解析 JSON 輸出，找到 'install_dir'
-          CORE_PATH=$(arduino-cli core list --json | jq -r " [] | select(.id == \"${CORE_NAME}\") | .installed_paths[] | select(.key == \"install_dir\") | .value")
+          CORE_PATH=$(arduino-cli core list --json | jq -r '
+            .[] 
+            | select(.id == "STM32:stm32") 
+            | .installed_paths[] 
+            | select(.key == "install_dir") 
+            | .value
+          ')
 
-          echo "${CORE_PATH}"
+          if [ -z "$CORE_PATH" ]; then
+            echo "Error: Could not find install path for core STM32:stm32. Check if the core installation failed."
+            # 列印 JSON 輸出幫助調試
+            echo "--- Debug: arduino-cli core list JSON output ---"
+            arduino-cli core list --json
+            echo "------------------------------------------------"
+            exit 1
+          fi          echo "${CORE_PATH}"
           #if [ -z "$CORE_PATH" ]; then
           #  echo "Error: Could not find install path for core ${CORE_NAME}"
           #  exit 1
