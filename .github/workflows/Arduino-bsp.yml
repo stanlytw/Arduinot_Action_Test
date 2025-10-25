@@ -51,6 +51,7 @@ jobs:
           # 核心名稱通常是供應商名稱:架構名稱
           arduino-cli core install nuvoton:nuvoton_m4
           arduino-cli board listall
+          arduino-cli core list --json
       
       - name: Run INO project(AVR and NVT)
         shell: bash 
@@ -61,8 +62,8 @@ jobs:
           #ls -al
           #cd ../../../
           #ls -al
-          arduino-cli compile -b arduino:avr:uno Arduinot_Action_Test.ino    
-          arduino-cli compile -b nuvoton:nuvoton_m4:nuvoton_m467sd Arduinot_Action_Test.ino
+          #arduino-cli compile -b arduino:avr:uno Arduinot_Action_Test.ino    
+          #arduino-cli compile -b nuvoton:nuvoton_m4:nuvoton_m467sd Arduinot_Action_Test.ino
       
       - name: Find and Compile Examples(NVT)
         shell: bash
