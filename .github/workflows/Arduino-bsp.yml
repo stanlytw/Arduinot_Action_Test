@@ -48,7 +48,7 @@ jobs:
         run: |
           #arduino-cli config init
           arduino-cli core update-index
-          arduino-cli core install arduino:avr
+          #arduino-cli core install arduino:avr
 
           # 安裝 UNO_M4 核心
           # 核心名稱通常是供應商名稱:架構名稱
